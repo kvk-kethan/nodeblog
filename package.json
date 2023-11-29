@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js"
+    "start_prod": "SET NODE_ENV=production& node server.js",
+    "start_dev": "SET NODE_ENV=development& nodemon server.js"
   },
   "keywords": [],
   "author": "",

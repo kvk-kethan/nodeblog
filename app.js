@@ -1,7 +1,7 @@
 const express=require("express")
 const authRouter=require("./routes/userRoutes")
 const blogRouter=require("./routes/BlogRoutes")
-const globalErrorHandlers = require("./controllers/globalErrorHandlers")
+const globalErrorControllers = require("./controllers/globalErrorControllers")
 const app=express()
 
 app.use(express.json())
@@ -19,6 +19,6 @@ app.all("*",(req,res,next)=>{
 })
 
 //global error handler
-app.use(globalErrorHandlers)
+app.use(globalErrorControllers)
 
 module.exports=app;
