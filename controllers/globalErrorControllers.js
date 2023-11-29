@@ -24,7 +24,7 @@ const prodError = (res, err) => {
 }
 
 
-const validationErrorHandler=(Err)=>{
+const validationErrorHandler=(err)=>{
     let errArray=Object.values(err.errors)
     let msgs=errArray.map(doc=>doc.message)
     let msg=msgs.join(" .")
