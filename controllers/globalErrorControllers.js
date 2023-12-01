@@ -43,6 +43,14 @@ const duplicateErrorHandler=(err)=>{
     let error=new CustomError(400,msg)
     return error
 }
+const handleTokenExpiredError=()=>{
+    let error=new CustomError(403,`your session expired,Login in once again`)
+    return error
+}
+const handleTokenError=()=>{
+    let error=new CustomError(403,`Something went wrong please Login in once again`)
+    return error
+}
 module.exports = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500
     err.status = err.status || "error"
@@ -59,6 +67,13 @@ module.exports = (err, req, res, next) => {
         if(err.name==="CastError"){
             err=handleCastError(err)
         }
+        if(err.name==="TokenExpiredError"){
+            err=handleTokenExpiredError(err)
+        }
+        if(err.name==="JsonWebTokenError"){
+            err=handleTokenError(err)
+        }
+
         prodError(res, err)
     }
 }

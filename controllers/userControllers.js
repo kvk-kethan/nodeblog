@@ -5,6 +5,7 @@ const asyncErrorHandler=require("../utils/asyncErrorHandler")
 const genToken=async (id)=>{
    return await jwt.sign({id},process.env.JWT_SECRET,{
         expiresIn:24*60*60
+        // expiresIn:5
     })
 }
 const signup=asyncErrorHandler(async (req,res,next)=>{
