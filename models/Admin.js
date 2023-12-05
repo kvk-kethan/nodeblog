@@ -2,12 +2,13 @@ const {Schema,model}=require("mongoose")
 const validator=require("validator")
 const bcrypt=require("bcryptjs")
 
-const userSchema = new Schema(
+const adminSchema = new Schema(
   {
     name: {
       type: String,
       required: [true, "name field cant be empty"],
       trim: true,
+      default:"admin"
     },
     email: {
       type: String,
@@ -19,10 +20,10 @@ const userSchema = new Schema(
     role: {
       type: String,
       enum: {
-        values: ["user"],
+        values: ["admin"],
         message:`{VALUE} role is not defined`
       },
-      default: "user",
+      default: "admin",
     },
     password: {
       type: String,
@@ -46,13 +47,13 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.pre("save",async function(next){
+adminSchema.pre("save",async function(next){
     this.password=await bcrypt.hash(this.password,10)
     next()
 })
 
-userSchema.methods.comparePassword=async function(pwd,pwdDB){
+adminSchema.methods.comparePassword=async function(pwd,pwdDB){
     return await bcrypt.compare(pwd,pwdDB)
 }
 
-module.exports=model("user",userSchema);
+module.exports=model("admin",adminSchema);
